@@ -72,8 +72,6 @@ public class HomeController {
         // Add once service is implemented:
         Student student = studentServ.login(newLogin, result);
 
-
-
         if (result.hasErrors()) {
             model.addAttribute("newUser", new Student());
             return "signup.jsp";
@@ -84,47 +82,7 @@ public class HomeController {
         session.setAttribute("loggedInUserID", student.getId());
         return "redirect:/dashboard";
     }
-    @RequestMapping("/dashboard")
-    public String dashboard(HttpSession session, Model model) {
 
-        Long loggedInUserID = (Long) session.getAttribute("loggedInUserID");
-
-        if (loggedInUserID == null) {
-
-            return "redirect:/";
-        }
-
-        Student loggedInStudent = studentServ.findOneUser(loggedInUserID);
-
-        model.addAttribute("user", loggedInStudent);
-
-        List<Course> allCourses = courseServ.getAllCourses();
-        model.addAttribute("courses", allCourses);
-
-        return "dashboard.jsp";
-
-    }
-//I want to open a page with information about a course when I click on the course name
-    @RequestMapping("/course/{id}")
-    public String course(HttpSession session, Model model, @PathVariable Long id) {
-
-        Long loggedInUserID = (Long) session.getAttribute("loggedInUserID");
-
-        if (loggedInUserID == null) {
-
-            return "redirect:/";
-        }
-        Student loggedInStudent = studentServ.findOneUser(loggedInUserID);
-
-        model.addAttribute("user", loggedInStudent);
-
-        //get one course with the provided id
-        Course course = courseServ.getCourseById(id);
-        model.addAttribute("course", course);
-
-        return "course.jsp";
-
-    }
 
 
     @RequestMapping("/logout")
