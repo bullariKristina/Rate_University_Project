@@ -83,6 +83,26 @@ public class HomeController {
         return "redirect:/dashboard";
     }
 
+    @RequestMapping("/dashboard")
+    public String dashboard(HttpSession session, Model model) {
+
+        Long loggedInUserID = (Long) session.getAttribute("loggedInUserID");
+
+        if (loggedInUserID == null) {
+
+            return "redirect:/";
+        }
+
+        Student loggedInStudent = studentServ.findOneUser(loggedInUserID);
+
+        model.addAttribute("user", loggedInStudent);
+
+        List<Course> allCourses = courseServ.getAllCourses();
+        model.addAttribute("courses", allCourses);
+
+        return "dashboard.jsp";
+
+    }
 
 
     @RequestMapping("/logout")
