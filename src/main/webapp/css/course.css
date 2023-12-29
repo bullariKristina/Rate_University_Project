@@ -1,4 +1,20 @@
 /* course.css */
+.star-rating {
+    unicode-bidi: bidi-override;
+    color: #FFD700; /* Set the color for filled stars */
+    font-size: 20px;
+}
 
+.star-rating span {
+    display: inline-block;
+    position: relative;
+    width: 1.1em;
+}
+
+.star-filled {
+    position: absolute;
+    left: 0;
+    overflow: hidden;
+}
 
 

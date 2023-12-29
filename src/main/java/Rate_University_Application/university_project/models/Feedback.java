@@ -36,7 +36,8 @@ public class Feedback {
     @Column(name = "rating")
     @Min(value = 1, message = "Rating should not be less than 1")
     @Max(value = 5, message = "Rating should not be greater than 5")
-    private int rating; // Rating given by the student for the course (1 to 5)
+    private int rating;// Rating given by the student for the course (1 to 5)
+
 
     public Feedback(Long id, Student student, Course course, String description, int rating) {
         this.id = id;
@@ -82,7 +83,7 @@ public class Feedback {
         this.description = description;
     }
 
-    public double getRating() {
+    public int getRating() {
         return rating;
     }
 
@@ -90,6 +91,9 @@ public class Feedback {
         this.rating = rating;
     }
 
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 
 }
 
