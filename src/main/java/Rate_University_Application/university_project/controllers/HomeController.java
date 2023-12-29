@@ -103,6 +103,42 @@ public class HomeController {
         return "dashboard.jsp";
 
     }
+//   @GetMapping("/search")
+//public String searchCourses(@RequestParam("searchKeyword") String searchKeyword, Model model, HttpSession session) {
+//    Long loggedInUserID = (Long) session.getAttribute("loggedInUserID");
+//
+//    if (loggedInUserID == null) {
+//        return "redirect:/";
+//    }
+//
+//    Student loggedInStudent = studentServ.findOneUser(loggedInUserID);
+//    model.addAttribute("user", loggedInStudent);
+//
+//    List<Course> searchResults = courseServ.searchCoursesByName(searchKeyword);
+//    model.addAttribute("courses", searchResults);
+//    return "searchResults.jsp"; // Create a JSP page to display search results
+//}
+
+    @RequestMapping("/course/{id}")
+    public String course(HttpSession session, Model model, @PathVariable Long id) {
+
+        Long loggedInUserID = (Long) session.getAttribute("loggedInUserID");
+
+        if (loggedInUserID == null) {
+
+            return "redirect:/";
+        }
+        Student loggedInStudent = studentServ.findOneUser(loggedInUserID);
+
+        model.addAttribute("user", loggedInStudent);
+
+        //get one course with the provided id
+        Course course = courseServ.getCourseById(id);
+        model.addAttribute("course", course);
+
+        return "course.jsp";
+
+    }
 
 
     @RequestMapping("/logout")
