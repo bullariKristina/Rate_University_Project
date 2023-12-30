@@ -69,6 +69,7 @@
 </header>
 <!-- ***** Header Area End ***** -->
 
+
 <div class="main-banner" id="top">
     <div class="container">
         <div class="row">
@@ -80,14 +81,36 @@
     </div>
 </div>
 
+<br>
 
-<div class="">
+<div class="container">
     <div class="content">
-        <h1>Course Details </h1>
-        <h2>${course.name}</h2>
-        <h2>Description:</h2>
+        <h1>${course.name}</h1><br>
+        <div class="info-section">
+            <span class="info-label">Lecturer:</span>
+            <span class="info-value">${course.lecturer}</span>
+        </div>
+        <div class="info-section">
+            <span class="info-label">Duration:</span>
+            <span class="info-value">${course.duration}</span>
+        </div>
+        <div class="info-section">
+            <span class="info-label">Location:</span>
+            <span class="info-value">${course.location}</span>
+        </div>
+        <div class="info-section">
+            <span class="info-label">Number of Students Enrolled:</span>
+            <span class="info-value">${studentsNum}</span>
+        </div> <br>
+        <h5>Description:</h5>
         <p>${course.description}</p>
-        <p>Number of students enrolled: ${studentsNum}</p>
+    </div>
+
+        <br><br>
+
+        <form action="feedback.jsp">
+            <button type="submit">Leave Feedback</button>
+        </form><br><br>
 
         <!-- Display Existing Feedback -->
         <h2>Existing Feedback:</h2>

@@ -31,55 +31,6 @@
     </div>
   </div>
 </div>
-<!-- ***** Preloader End ***** -->
-
-<!-- ***** Header Area Start ***** -->
-<header class="header-area header-sticky">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <nav class="main-nav">
-          <!-- ***** Logo Start ***** -->
-          <a href="/" class="logo">
-            <h1>RATE COURSES</h1>
-          </a>
-          <!-- ***** Logo End ***** -->
-          <!-- ***** Serach Start ***** -->
-          <div class="search-input">
-            <form action="${pageContext.request.contextPath}/search" method="get" class="d-flex">
-              <input type="text" name="name" placeholder="Search the course" id="searchText" />
-              <button type="submit"><i class="fa fa-search"></i></button>
-            </form>
-          </div>
-
-          <ul class="nav">
-            <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
-            <li class="scroll-to-section"><a href="#courses">Courses</a></li>
-            <li class="scroll-to-section"><a href="#team">Top 8 Rated</a></li>
-            <li class="scroll-to-section"><a href="#events">Schedule Calendar</a></li>
-            <li class="scroll-to-section"><a href="/logout">Logout</a></li>
-          </ul>
-          <a class='menu-trigger'>
-            <span>Menu</span>
-          </a>
-        </nav>
-      </div>
-    </div>
-  </div>
-</header>
-<!-- ***** Header Area End ***** -->
-
-<div class="main-banner" id="top">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="owl-carousel owl-banner">
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 
 <div class="">
   <div class="content">

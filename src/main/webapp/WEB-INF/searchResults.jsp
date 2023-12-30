@@ -44,7 +44,7 @@
                         <h1>RATE COURSES</h1>
                     </a>
                     <!-- ***** Logo End ***** -->
-                    <!-- ***** Serach Start ***** -->
+                    <!-- ***** Search Start ***** -->
                     <div class="search-input">
                         <form action="${pageContext.request.contextPath}/search" method="get" class="d-flex">
                             <input type="text" name="name" placeholder="Search the course" id="searchText" />
@@ -92,8 +92,6 @@
     </div>
 </div>
 
-<!-- JavaScript for star rating -->
-<script src="../js/feedback.js"></script>
 
 <script src="../templatemo_586_scholar/vendor/jquery/jquery.min.js"></script>
 <script src="../templatemo_586_scholar/vendor/bootstrap/js/bootstrap.min.js"></script>
