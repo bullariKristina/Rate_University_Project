@@ -1,45 +1,100 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ page isErrorPage="true"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
-    <meta charset="UTF-8">
-    <title>Course Details</title>
-    <link rel="stylesheet" href="/css/course.css">
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>Rate Course</title>
+    <link href="../templatemo_586_scholar/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/fontawesome.css">
+    <link rel="stylesheet" href="../css/templatemo-scholar.css">
+    <link rel="stylesheet" href="../css/owl.css">
+    <link rel="stylesheet" href="../css/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
 </head>
+
 <body>
-<div class="background-header">
+
+<!-- ***** Preloader Start ***** -->
+<div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+<!-- ***** Preloader End ***** -->
+
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="/" class="logo">
+                        <h1>RATE COURSES</h1>
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Serach Start ***** -->
+                    <div class="search-input">
+                        <form action="${pageContext.request.contextPath}/search" method="get" class="d-flex">
+                            <input type="text" name="name" placeholder="Search the course" id="searchText" />
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+
+                    <ul class="nav">
+                        <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
+                        <li class="scroll-to-section"><a href="#courses">Courses</a></li>
+                        <li class="scroll-to-section"><a href="#team">Top 8 Rated</a></li>
+                        <li class="scroll-to-section"><a href="#events">Schedule Calendar</a></li>
+                        <li class="scroll-to-section"><a href="/logout">Logout</a></li>
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->
+
+<div class="main-banner" id="top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="owl-carousel owl-banner">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="">
     <div class="content">
-        <h1>Course Details: ${course.name}</h1>
+        <h1>Course Details </h1>
+        <h2>${course.name}</h2>
         <h2>Description:</h2>
         <p>${course.description}</p>
-
-        <!-- Feedback Form -->
-        <h2>Feedback</h2>
-        <form action="/submitFeedback" method="post">
-            <input type="text" name="feedback" placeholder="Enter your feedback" required><br><br>
-
-            <!-- Hidden input field for storing the selected rating -->
-            <input type="hidden" id="rating" name="rating" value="0">
-
-            <!-- Star rating section -->
-            <h2>Your Rating</h2>
-            <div class="star-rating" id="starRating">
-                <span class="star" data-value="1">☆</span>
-                <span class="star" data-value="2">☆</span>
-                <span class="star" data-value="3">☆</span>
-                <span class="star" data-value="4">☆</span>
-                <span class="star" data-value="5">☆</span>
-            </div> <br>
-
-            <input type="submit" value="Submit Feedback">
-        </form>
+        <p>Number of students enrolled: ${studentsNum}</p>
 
         <!-- Display Existing Feedback -->
         <h2>Existing Feedback:</h2>
-        <c:forEach var="feedback" items="${feedbackList}">
+        <c:if test="${empty feedbacks}">
+            <p>No feedback yet. Be the first to leave one!</p>
+        </c:if>
+        <c:forEach var="feedback" items="${feedbacks}">
             <p>${feedback.description}</p>
             <div class="star-rating">
                 <c:forEach var="i" begin="1" end="${feedback.rating}">
@@ -49,14 +104,21 @@
                     <span>☆</span>
                 </c:forEach>
             </div>
-            <p>Updated at: <fmt:formatDate value="${feedback.updatedAt}" pattern="yyyy-MM-dd HH:mm:ss"/></p>
-            <hr>
+            <p>Posted on: <fmt:formatDate value="${feedback.createdAt}" pattern="yyyy-MM-dd"/></p>
         </c:forEach>
     </div>
 </div>
 
 <!-- JavaScript for star rating -->
-<script src="/js/feedback.js"></script>
+<script src="../js/feedback.js"></script>
+
+<script src="../templatemo_586_scholar/vendor/jquery/jquery.min.js"></script>
+<script src="../templatemo_586_scholar/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../js/isotope.min.js"></script>
+<script src="../js/owl-carousel.js"></script>
+<script src="../js/counter.js"></script>
+<script src="../js/custom.js"></script>
+<script src="../js/join.js"></script>
 
 </body>
 </html>

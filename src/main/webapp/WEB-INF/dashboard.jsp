@@ -4,6 +4,9 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!-- Formatting (like dates) -->
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ page isErrorPage="true"%>
+
 <!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -41,19 +44,18 @@
             <div class="col-12">
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
-                    <a href="index.html" class="logo">
+                    <a href="/" class="logo">
                         <h1>RATE COURSES</h1>
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Serach Start ***** -->
                     <div class="search-input">
-                        <form id="search" action="#">
-                            <input type="text" placeholder="Search the course" id='searchText' name="searchKeyword" onkeypress="handle" />
-                            <i class="fa fa-search"></i>
+                        <form action="${pageContext.request.contextPath}/search" method="get" class="d-flex">
+                            <input type="text" name="name" placeholder="Search the course" id="searchText" />
+                            <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
-                    <!-- ***** Serach Start ***** -->
-                    <!-- ***** Menu Start ***** -->
+
                     <ul class="nav">
                         <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
                         <li class="scroll-to-section"><a href="#courses">Courses</a></li>
@@ -100,7 +102,7 @@
                  <div class="col-lg-4 col-md-6 align-self-center mb-30 event_outer col-md-6 firstYear">
                      <div class="events_item">
                          <div class="thumb">
-                             <a href="/course/${course.id}"><img src="../../../../templatemo_586_scholar/assets/images/course-01.jpg" alt=""></a>
+                             <a href="/course/${course.id}"><img src="../templatemo_586_scholar/assets/images/course-01.jpg" alt=""></a>
                              <span class="category">${course.duration} weeks</span>
                              <span class="price"><h6>JOIN</h6></span>
                          </div>
@@ -131,7 +133,7 @@
 
 
 <!-- Top 8 Rated Courses -->
-  <section class="top-rated-courses "section team" id="team"">
+  <section class="top-rated-courses ">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -146,7 +148,7 @@
                     <div class="course-item">
                         <div class="thumb">
                             <!-- You can place the course image here -->
-                            <img src="img/c.png" alt="Course Image">
+                            <img src="/img/c.png" alt="Course Image">
                         </div>
                         <div class="down-content">
                             <h4>${course.name}</h4>

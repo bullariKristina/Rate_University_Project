@@ -3,6 +3,7 @@ package Rate_University_Application.university_project.services;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -59,4 +60,21 @@ public class FeedbackService {
             throw new RuntimeException("Error while deleting feedback: " + e.getMessage());
         }
     }
+    //return all feedbacks of a course
+    public List<Feedback> getFeedbacksByCourse(Course course) {
+        return feedbackRepository.findByCourse(course);
+    }
+
+    //validate the feedback so that a student can only give one feedback for a course
+    public boolean validateFeedback(Student student, Course course) {
+        List<Feedback> feedbacks = feedbackRepository.findByStudent(student);
+        for (Feedback feedback : feedbacks) {
+            if (feedback.getCourse().getId() == course.getId()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
 }

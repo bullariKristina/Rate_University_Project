@@ -667,23 +667,23 @@ Banner Style
 */
 
 .main-banner {
-  background-image: url(../../../../../templatemo_586_scholar/assets/images/banner-bg.jpg);
+  background-image: url(../templatemo_586_scholar/assets/images/banner-bg.jpg);
   background-position: right bottom;
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 80px 0px 120px 0px;
+  padding: 80px 0px 100px 0px;
 }
 
 .main-banner .item-1 {
-  background-image: url(../../../../../templatemo_586_scholar/assets/images/banner-item-01.jpg);
+  background-image: url(../templatemo_586_scholar/assets/images/banner-item-01.jpg);
 }
 
 .main-banner .item-2 {
-  background-image: url(../../../../../templatemo_586_scholar/assets/images/banner-item-02.jpg);
+  background-image: url(../templatemo_586_scholar/assets/images/banner-item-02.jpg);
 }
 
 .main-banner .item-3 {
-  background-image: url(../../../../../templatemo_586_scholar/assets/images/banner-item-03.jpg);
+  background-image: url(../templatemo_586_scholar/assets/images/banner-item-03.jpg);
 }
 
 .main-banner .item {
@@ -1102,7 +1102,7 @@ Facts Style
 }
 
 .fun-facts:after {
-  background: url(../../../../../templatemo_586_scholar/assets/images/contact-dec-01.png);
+  background: url(../templatemo_586_scholar/assets/images/contact-dec-01.png);
   position: absolute;
   left: 15%;
   opacity: 0.5;
@@ -1523,7 +1523,7 @@ Contact Style
 }
 
 .contact-us .contact-us-content::before {
-  background: url(../../../../../templatemo_586_scholar/assets/images/contact-dec-01.png);
+  background: url(../templatemo_586_scholar/assets/images/contact-dec-01.png);
   position: absolute;
   left: 50%;
   transform: translateX(-149px);
@@ -1536,7 +1536,7 @@ Contact Style
 }
 
 .contact-us .contact-us-content::after {
-  background: url(../../../../../templatemo_586_scholar/assets/images/contact-dec-02.png);
+  background: url(../templatemo_586_scholar/assets/images/contact-dec-02.png);
   position: absolute;
   right: 0;
   bottom: 0;
@@ -1663,7 +1663,7 @@ footer p a:hover {
 }
 
 footer::before {
-  background: url(../../../../../templatemo_586_scholar/assets/images/contact-dec-01.png);
+  background: url(../templatemo_586_scholar/assets/images/contact-dec-01.png);
   position: absolute;
   left: 30px;
   transform: rotate(180deg);
@@ -1693,7 +1693,7 @@ body {
     border-right: none;
   }
   .main-banner .item {
-    padding: 80px 30px 120px 30px !important;
+    padding: 80px 30px 100px 30px !important;
   }
   .main-banner .owl-nav {
     left: 30px !important;

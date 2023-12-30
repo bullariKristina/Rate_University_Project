@@ -1,8 +1,7 @@
 package Rate_University_Application.university_project.controllers;
-import Rate_University_Application.university_project.models.Course;
-import Rate_University_Application.university_project.models.LoginStudent;
-import Rate_University_Application.university_project.models.Student;
+import Rate_University_Application.university_project.models.*;
 import Rate_University_Application.university_project.services.CourseService;
+import Rate_University_Application.university_project.services.FeedbackService;
 import Rate_University_Application.university_project.services.StudentService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.*;
 
@@ -20,11 +20,14 @@ public class HomeController {
     private StudentService studentServ;
     @Autowired
     private CourseService courseServ;
+    @Autowired
+    private FeedbackService feedbackServ;
 
 
-    public HomeController(StudentService studentServ, CourseService courseServ) {
+    public HomeController(StudentService studentServ, CourseService courseServ, FeedbackService feedbackServ) {
         this.studentServ = studentServ;
         this.courseServ = courseServ;
+        this.feedbackServ = feedbackServ;
     }
 
     @GetMapping("/")
@@ -53,8 +56,6 @@ public class HomeController {
         // to do some extra validations and create a new user!
 
         if (result.hasErrors()) {
-            // Be sure to send in the empty LoginUser before
-            // re-rendering the page.
             model.addAttribute("newLogin", new LoginStudent());
             return "signup.jsp";
         }
@@ -73,7 +74,7 @@ public class HomeController {
         Student student = studentServ.login(newLogin, result);
 
         if (result.hasErrors()) {
-            model.addAttribute("newUser", new Student());
+            model.addAttribute("newStudent", new Student());
             return "signup.jsp";
         }
 
@@ -103,21 +104,44 @@ public class HomeController {
         return "dashboard.jsp";
 
     }
-//   @GetMapping("/search")
-//public String searchCourses(@RequestParam("searchKeyword") String searchKeyword, Model model, HttpSession session) {
-//    Long loggedInUserID = (Long) session.getAttribute("loggedInUserID");
-//
-//    if (loggedInUserID == null) {
-//        return "redirect:/";
-//    }
-//
-//    Student loggedInStudent = studentServ.findOneUser(loggedInUserID);
-//    model.addAttribute("user", loggedInStudent);
-//
-//    List<Course> searchResults = courseServ.searchCoursesByName(searchKeyword);
-//    model.addAttribute("courses", searchResults);
-//    return "searchResults.jsp"; // Create a JSP page to display search results
-//}
+
+    //a controller to display feedback.jsp
+    // @RequestMapping("/feedback/{id}")
+    // public String feedback(HttpSession session, Model model, @PathVariable Long id) {
+
+    //     Long loggedInUserID = (Long) session.getAttribute("loggedInUserID");
+
+    //     if (loggedInUserID == null) {
+
+    //         return "redirect:/";
+    //     }
+    //     Student loggedInStudent = studentServ.findOneUser(loggedInUserID);
+
+    //     model.addAttribute("user", loggedInStudent);
+
+    //     //get one course with the provided id
+    //     Course course = courseServ.getCourseById(id);
+    //     model.addAttribute("course", course);
+
+    //     return "feedback.jsp";
+    // }
+
+    @GetMapping("/search")
+    public String searchCourses(@RequestParam("name") String name, Model model, HttpSession session) {
+        Long loggedInUserID = (Long) session.getAttribute("loggedInUserID");
+
+        if (loggedInUserID == null) {
+            return "redirect:/";
+        }
+
+        Student loggedInStudent = studentServ.findOneUser(loggedInUserID);
+        model.addAttribute("user", loggedInStudent);
+
+        List<Course> searchResults = courseServ.searchCoursesByName(name);
+        model.addAttribute("courses", searchResults);
+        return "searchResults.jsp"; //  A JSP page to display search results
+    }
+
 
     @RequestMapping("/course/{id}")
     public String course(HttpSession session, Model model, @PathVariable Long id) {
@@ -136,9 +160,16 @@ public class HomeController {
         Course course = courseServ.getCourseById(id);
         model.addAttribute("course", course);
 
-        return "course.jsp";
+        int studentsNum = course.getRegisteredStudentsNum();
+        model.addAttribute("studentsNum", studentsNum);
 
+        //get all feedbacks for the course
+        List<Feedback> feedbacks = feedbackServ.getFeedbacksByCourse(course);
+        model.addAttribute("feedbacks", feedbacks);
+        return "course.jsp";
     }
+
+
 
 
     @RequestMapping("/logout")

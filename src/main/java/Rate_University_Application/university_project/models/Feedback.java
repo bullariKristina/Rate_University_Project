@@ -15,6 +15,21 @@ public class Feedback {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+    @Column(length = 1000)
+    private String description;
+
+    @Column(name = "rating")
+    @Min(value = 1, message = "Rating should not be less than 1")
+    @Max(value = 5, message = "Rating should not be greater than 5")
+    private int rating;// Rating given by the student for the course (1 to 5)
+
+    @Column(updatable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date createdAt;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date updatedAt;
+
     @ManyToOne
     @JoinColumn(name = "student_id")
     private Student student;
@@ -23,32 +38,8 @@ public class Feedback {
     @JoinColumn(name = "course_id")
     private Course course;
 
-    @Column(length = 1000)
-    private String description;
-
-
-    @Column(updatable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date createdAt;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date updatedAt;
-
-    @Column(name = "rating")
-    @Min(value = 1, message = "Rating should not be less than 1")
-    @Max(value = 5, message = "Rating should not be greater than 5")
-    private int rating;// Rating given by the student for the course (1 to 5)
-
-
-    public Feedback(Long id, Student student, Course course, String description, int rating) {
-        this.id = id;
-        this.student = student;
-        this.course = course;
-        this.description = description;
-        this.rating = rating;
-    }
 
     public Feedback() {
-
     }
 
     public Long getId() {
@@ -95,5 +86,12 @@ public class Feedback {
         this.updatedAt = updatedAt;
     }
 
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
 }
 
