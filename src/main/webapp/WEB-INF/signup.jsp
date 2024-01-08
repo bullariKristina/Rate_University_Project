@@ -50,16 +50,16 @@
                         <form:errors path="email" class="errors text-danger"></form:errors>
                         <form:errors path="password" class="errors text-danger"></form:errors>
                         <div class="button input-box">
-                            <input type="submit" value="submit">
+                            <input type="submit" value="Submit">
                         </div>
-                        <div class="text sign-up-text">Don't have an account? <label for="flip">Sigup now</label></div>
+                        <div class="text sign-up-text">Don't have an account? <label for="flip">Sign up now</label></div>
                     </div>
                 </form:form>
             </div>
 
             <!-- REGISTER FORM-->
             <div class="signup-form">
-                <div class="title">Signup</div>
+                <div class="title">Sign up</div>
                 <form:form action="/register" method="post" modelAttribute="newStudent" >
                     <div class="input-boxes">
                         <div class="input-box">
@@ -88,9 +88,9 @@
                             <form:input type="password"  placeholder="Enter your confirm password" path="confirm"></form:input>
                         </div>
                         <div class="button input-box">
-                            <input type="submit" value="Sumbit">
+                            <input type="submit" value="Submit">
                         </div>
-                        <div class="text sign-up-text">Already have an account? <label for="flip">Login now</label></div>
+                        <div class="text sign-up-text">Already have an account? <label for="flip">Log in now</label></div>
                     </div>
                 </form:form>
             </div>
