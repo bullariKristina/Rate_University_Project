@@ -6,19 +6,6 @@
 
 <%@ page isErrorPage="true"%>
 
-<%@ page import="Rate_University_Application.university_project.repositories.FeedbackRepository" %>
-<%@ page import="Rate_University_Application.university_project.services.FeedbackService" %>
-
-
-<%
-    FeedbackRepository feedbackRepository = (FeedbackRepository) request.getAttribute("feedbackRepository");
-    FeedbackService feedbackService = new FeedbackService(feedbackRepository);
-    //request.setAttribute("feedbackService", feedbackService);
-    // Forward to your JSP
-    //request.getRequestDispatcher("course.jsp").forward(request, response);
-
-    Long feedbackId = feedbackService.generateNewFeedbackId();
-%>
 
 <!DOCTYPE html>
 <html lang="en" >
