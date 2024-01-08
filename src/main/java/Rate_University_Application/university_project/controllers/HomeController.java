@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import java.util.*;
 
@@ -28,6 +28,11 @@ public class HomeController {
         this.studentServ = studentServ;
         this.courseServ = courseServ;
         this.feedbackServ = feedbackServ;
+    }
+
+    @ModelAttribute("newFeedback")
+    public Feedback getNewFeedbackModel() {
+        return new Feedback();
     }
 
     @GetMapping("/")
@@ -105,26 +110,75 @@ public class HomeController {
 
     }
 
+
+
+
     //a controller to display feedback.jsp
-    // @RequestMapping("/feedback/{id}")
-    // public String feedback(HttpSession session, Model model, @PathVariable Long id) {
+    @RequestMapping("/feedback/{id}")
+    public String feedback(HttpSession session, Model model, @PathVariable Long id) {
+        Long loggedInUserID = (Long) session.getAttribute("loggedInUserID");
 
-    //     Long loggedInUserID = (Long) session.getAttribute("loggedInUserID");
+        if (loggedInUserID == null) {
+            return "redirect:/";
+        }
 
-    //     if (loggedInUserID == null) {
+        Student loggedInStudent = studentServ.findOneUser(loggedInUserID);
+        model.addAttribute("user", loggedInStudent);
 
-    //         return "redirect:/";
-    //     }
-    //     Student loggedInStudent = studentServ.findOneUser(loggedInUserID);
+        // Get one course with the provided id
+        Course course = courseServ.getCourseById(id);
+        model.addAttribute("course", course);
 
-    //     model.addAttribute("user", loggedInStudent);
+        return "feedback.jsp";
+    }
 
-    //     //get one course with the provided id
-    //     Course course = courseServ.getCourseById(id);
-    //     model.addAttribute("course", course);
-
-    //     return "feedback.jsp";
+    //@PostMapping("/submitFeedback")
+    //public String submitFeedback(@ModelAttribute("newFeedback") Feedback newFeedback) {
+    // feedbackServ.addFeedback(newFeedback);
+    // return "redirect: /course/{id}";
     // }
+
+    @PostMapping("/submitFeedback")
+    public String submitFeedback(HttpSession session, @ModelAttribute("newFeedback") @Valid Feedback newFeedback, BindingResult result) {
+        if (result.hasErrors()) {
+            // Handle validation errors, if any
+            return "error"; // Return to the form with error messages
+        }
+
+        try {
+            Long loggedInUserID = (Long) session.getAttribute("loggedInUserID");
+            if (loggedInUserID == null) {
+                // Redirect to login or handle unauthenticated user
+                return "redirect:/login";
+            }
+
+            Course submittedCourse = courseServ.getCourseById(newFeedback.getCourse().getId());
+            if (submittedCourse == null) {
+                // Handle missing course
+                return "course-not-found"; // Redirect to a page indicating the course wasn't found
+            }
+
+            newFeedback.setCourse(submittedCourse);
+
+            Student loggedInStudent = studentServ.findOneUser(loggedInUserID);
+            if (loggedInStudent == null) {
+                // Handle missing student
+                return "student-not-found"; // Redirect to a page indicating the user wasn't found
+            }
+
+            newFeedback.setStudent(loggedInStudent);
+
+            feedbackServ.addFeedback(newFeedback);
+
+            // Redirect to the course page
+            return "redirect:/course/" + submittedCourse.getId();
+        } catch (Exception e) {
+            e.printStackTrace(); // Print the stack trace for debugging
+            // Handle exceptions if any during feedback addition
+            return "error-page"; // Redirect to an error page or handle error accordingly
+        }
+    }
+
 
     @GetMapping("/search")
     public String searchCourses(@RequestParam("name") String name, Model model, HttpSession session) {
@@ -177,6 +231,8 @@ public class HomeController {
         session.invalidate();
         return "redirect:/";
     }
+
+
 
 
 
