@@ -1,8 +1,11 @@
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 <%@ page isErrorPage="true"%>
+
 <!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -53,10 +56,10 @@
                     </div>
 
                     <ul class="nav">
-                        <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
-                        <li class="scroll-to-section"><a href="#courses">Courses</a></li>
-                        <li class="scroll-to-section"><a href="#team">Top 8 Rated</a></li>
-                        <li class="scroll-to-section"><a href="#events">Schedule Calendar</a></li>
+                        <li class="scroll-to-section"><a href="/dashboard#top" class="active">Home</a></li>
+                        <li class="scroll-to-section"><a href="/dashboard#courses">Courses</a></li>
+                        <li class="scroll-to-section"><a href="/dashboard#team">Top 8 Rated</a></li>
+                        <li class="scroll-to-section"><a href="/dashboard#events">Schedule Calendar</a></li>
                         <li class="scroll-to-section"><a href="/logout">Logout</a></li>
                     </ul>
                     <a class='menu-trigger'>
@@ -69,6 +72,7 @@
 </header>
 <!-- ***** Header Area End ***** -->
 
+
 <div class="main-banner" id="top">
     <div class="container">
         <div class="row">
@@ -80,37 +84,66 @@
     </div>
 </div>
 
+<br>
 
-<div class="">
+<div class="container">
     <div class="content">
-        <h1>Course Details </h1>
-        <h2>${course.name}</h2>
-        <h2>Description:</h2>
+        <h1>${course.name}</h1><br>
+        <div class="info-section">
+            <span class="info-label">Lecturer:</span>
+            <span class="info-value">${course.lecturer}</span>
+        </div>
+        <div class="info-section">
+            <span class="info-label">Duration:</span>
+            <span class="info-value">${course.duration}</span>
+        </div>
+        <div class="info-section">
+            <span class="info-label">Location:</span>
+            <span class="info-value">${course.location}</span>
+        </div>
+        <div class="info-section">
+            <span class="info-label">Number of Students Enrolled:</span>
+            <span class="info-value">${studentsNum}</span>
+        </div> <br>
+        <h5>Description:</h5>
         <p>${course.description}</p>
-        <p>Number of students enrolled: ${studentsNum}</p>
-
-        <!-- Display Existing Feedback -->
-        <h2>Existing Feedback:</h2>
-        <c:if test="${empty feedbacks}">
-            <p>No feedback yet. Be the first to leave one!</p>
-        </c:if>
-        <c:forEach var="feedback" items="${feedbacks}">
-            <p>${feedback.description}</p>
-            <div class="star-rating">
-                <c:forEach var="i" begin="1" end="${feedback.rating}">
-                    <span class="star-filled">★</span>
-                </c:forEach>
-                <c:forEach var="i" begin="${feedback.rating + 1}" end="5">
-                    <span>☆</span>
-                </c:forEach>
-            </div>
-            <p>Posted on: <fmt:formatDate value="${feedback.createdAt}" pattern="yyyy-MM-dd"/></p>
-        </c:forEach>
     </div>
+
+    <br><br>
+
+    <a href="/feedback/${course.id}">
+        <button type="button">Leave Feedback</button>
+    </a>
+    <br><br>
+
+    <!-- Display Existing Feedback -->
+    <h2>Existing Feedback:</h2><br>
+    <c:if test="${empty feedbacks}">
+        <p>No feedback yet. Be the first to leave one!</p>
+    </c:if>
+    <c:forEach var="feedback" items="${feedbacks}">
+        <p>${feedback.student.firstName}</p>
+        <p>${feedback.description}</p>
+        <div class="star-rating">
+            <c:forEach var="i" begin="1" end="${feedback.rating}">
+                <span class="star-filled">★</span>
+            </c:forEach>
+            <c:forEach var="i" begin="${feedback.rating + 1}" end="5">
+                <span>☆</span>
+            </c:forEach> <br>
+        </div>
+        <!--
+        test="feedback.student == user.id}">
+        <button type="button">Update Feedback</button>
+        <button type="button">Delete Feedback</button>
+        -->
+        <p>Posted on: <fmt:formatDate value="${feedback.createdAt}" pattern="yyyy-MM-dd"/></p>
+    </c:forEach>
+
 </div>
 
-<!-- JavaScript for star rating -->
-<script src="../js/feedback.js"></script>
+
+
 
 <script src="../templatemo_586_scholar/vendor/jquery/jquery.min.js"></script>
 <script src="../templatemo_586_scholar/vendor/bootstrap/js/bootstrap.min.js"></script>

@@ -42,6 +42,15 @@ public class Feedback {
     public Feedback() {
     }
 
+    public Feedback(Long id, String description, int rating, Date createdAt, Student student, Course course) {
+        this.id = id;
+        this.description=description;
+        this.rating=rating;
+        this.createdAt=createdAt;
+        this.student=student;
+        this.course=course;
+    }
+
     public Long getId() {
         return id;
     }
@@ -88,6 +97,10 @@ public class Feedback {
 
     public Date getCreatedAt() {
         return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public Date getUpdatedAt() {
