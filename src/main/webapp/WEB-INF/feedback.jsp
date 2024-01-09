@@ -32,16 +32,17 @@
     <form:hidden path="student" value="${user.id}"/>
     <form:hidden path="course" value="${course.id}"/>
 
-    <form:textarea path="description" placeholder="Describe your experience" rows="3" cols="30"/>
     <div class="content">We highly value your feedback! Kindly take a moment to rate your experience and provide us with your valuable feedback.</div>
-
+    <br>
     <div class="rate-box">
       <form:radiobutton path="rating" value="1" label=""/>
       <form:radiobutton path="rating" value="2" label=""/>
       <form:radiobutton path="rating" value="3" label=""/>
       <form:radiobutton path="rating" value="4" label=""/>
       <form:radiobutton path="rating" value="5" label=""/>
-    </div>
+    </div><br>
+    <form:textarea path="description" placeholder="Describe your experience" rows="3" cols="30"/>
+    <br>
 
     <input type="submit" value="Submit Feedback"/>
   </form:form>

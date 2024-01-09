@@ -40,6 +40,7 @@ public class Feedback {
 
 
     public Feedback() {
+
     }
 
     public Feedback(Long id, String description, int rating, Date createdAt, Student student, Course course) {

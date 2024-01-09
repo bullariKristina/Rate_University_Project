@@ -54,10 +54,10 @@
                         </div>
 
                         <ul class="nav">
-                            <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
-                            <li class="scroll-to-section"><a href="#courses">Courses</a></li>
-                            <li class="scroll-to-section"><a href="#team">Top 8 Rated</a></li>
-                            <li class="scroll-to-section"><a href="#events">Schedule Calendar</a></li>
+                            <li class="scroll-to-section"><a href="/dashboard#top" class="active">Home</a></li>
+                            <li class="scroll-to-section"><a href="/dashboard#courses">Courses</a></li>
+                            <li class="scroll-to-section"><a href="/dashboard#team">Top 8 Rated</a></li>
+                            <li class="scroll-to-section"><a href="/dashboard#events">Schedule Calendar</a></li>
                             <li class="scroll-to-section"><a href="/logout">Logout</a></li>
                         </ul>
                         <a class='menu-trigger'>

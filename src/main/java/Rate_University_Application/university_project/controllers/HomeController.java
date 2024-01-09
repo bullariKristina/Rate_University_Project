@@ -10,7 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import java.util.*;
+
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -26,6 +27,10 @@ public class HomeController {
         this.studentServ = studentServ;
         this.courseServ = courseServ;
         this.feedbackServ = feedbackServ;
+    }
+    @ModelAttribute("newFeedback")
+    public Feedback getNewFeedbackModel() {
+        return new Feedback();
     }
 
     @GetMapping("/")
@@ -117,6 +122,67 @@ public class HomeController {
         List<Course> searchResults = courseServ.searchCoursesByName(name);
         model.addAttribute("courses", searchResults);
         return "searchResults.jsp"; //  A JSP page to display search results
+    }
+
+    @RequestMapping("/feedback/{id}")
+    public String feedback(HttpSession session, Model model, @PathVariable Long id) {
+        Long loggedInUserID = (Long) session.getAttribute("loggedInUserID");
+
+        if (loggedInUserID == null) {
+            return "redirect:/";
+        }
+
+        Student loggedInStudent = studentServ.findOneUser(loggedInUserID);
+        model.addAttribute("user", loggedInStudent);
+
+        // Get one course with the provided id
+        Course course = courseServ.getCourseById(id);
+        model.addAttribute("course", course);
+
+        return "feedback.jsp";
+    }
+
+
+
+    @PostMapping("/submitFeedback")
+    public String submitFeedback(@Valid @ModelAttribute("newFeedback") Feedback newFeedback, HttpSession session, BindingResult result) {
+        if (result.hasErrors()) {
+            // Handle validation errors, if any
+            return "error"; // Return to the form with error messages
+        }
+
+        try {
+            Long loggedInUserID = (Long) session.getAttribute("loggedInUserID");
+            if (loggedInUserID == null) {
+                // Redirect to login or handle unauthenticated user
+                return "redirect:/login";
+            }
+
+            Course submittedCourse = courseServ.getCourseById(newFeedback.getCourse().getId());
+            if (submittedCourse == null) {
+                // Handle missing course
+                return "course-not-found"; // Redirect to a page indicating the course wasn't found
+            }
+
+            newFeedback.setCourse(submittedCourse);
+
+            Student loggedInStudent = studentServ.findOneUser(loggedInUserID);
+            if (loggedInStudent == null) {
+                // Handle missing student
+                return "student-not-found"; // Redirect to a page indicating the user wasn't found
+            }
+
+            newFeedback.setStudent(loggedInStudent);
+
+            feedbackServ.addFeedback(newFeedback);
+
+            // Redirect to the course page
+            return "redirect:/course/" + submittedCourse.getId();
+        } catch (Exception e) {
+            e.printStackTrace(); // Print the stack trace for debugging
+            // Handle exceptions if any during feedback addition
+            return "error-page"; // Redirect to an error page or handle error accordingly
+        }
     }
 
 

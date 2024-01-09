@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Set;
 
@@ -107,7 +108,12 @@ public class Course {
             totalRating += feedback.getRating();
             count++;
         }
-        return totalRating / count;
+        double averageRating = totalRating / count;
+
+        // Using DecimalFormat to format the averageRating to two decimal places
+        DecimalFormat df = new DecimalFormat("#.##");
+        df.setMaximumFractionDigits(2);
+        return Double.parseDouble(df.format(averageRating));
     }
 
     // Calculate number of registered students for the course
