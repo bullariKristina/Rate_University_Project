@@ -12,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
-
 @Controller
 public class HomeController {
     @Autowired
@@ -140,14 +139,13 @@ public class HomeController {
 
         int studentsNum = course.getRegisteredStudentsNum();
         model.addAttribute("studentsNum", studentsNum);
-        //get all feedbacks for the course with the student's full name
+
+        //get all feedbacks for the course
         List<Feedback> feedbacks = feedbackServ.getFeedbacksByCourse(course);
         model.addAttribute("feedbacks", feedbacks);
-        // Check if the logged-in student is enrolled in the course
-        boolean enrolled = courseServ.isStudentEnrolled(id, loggedInUserID);
-        model.addAttribute("enrolled", enrolled);
         return "course.jsp";
     }
+
 
 
 
@@ -156,6 +154,8 @@ public class HomeController {
         session.invalidate();
         return "redirect:/";
     }
+
+
 
 
 

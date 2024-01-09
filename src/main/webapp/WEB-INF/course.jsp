@@ -129,9 +129,9 @@
 
         <div class="content">
             <br><br>
-            <form action="feedback.jsp">
-                <button type="submit">Leave Feedback</button>
-            </form><br><br>
+            <a href="/feedback/${course.id}">
+                <button type="button">Leave Feedback</button>
+            </a><br><br>
 
             <!-- Display Existing Feedback -->
 

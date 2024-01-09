@@ -13,13 +13,21 @@ import Rate_University_Application.university_project.models.Student;
 import Rate_University_Application.university_project.repositories.FeedbackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 @Service
 public class FeedbackService {
 
     private final FeedbackRepository feedbackRepository;
 
+
+    public FeedbackRepository getFeedbackRepository() {
+        return feedbackRepository;
+    }
+
     @Autowired // If not using constructor injection
     public FeedbackService(FeedbackRepository feedbackRepository) {
+
         this.feedbackRepository = feedbackRepository;
     }
 
@@ -47,6 +55,21 @@ public class FeedbackService {
             throw new RuntimeException("Error while updating feedback: " + e.getMessage());
         }
     }
+    public Feedback addFeedback(Feedback newFeedback) {
+        try {
+            // Validate if the student has already given feedback for the course
+            if (validateFeedback(newFeedback.getStudent(), newFeedback.getCourse())) {
+                newFeedback.setCreatedAt(new Date());
+                return feedbackRepository.save(newFeedback);
+            } else {
+                throw new IllegalStateException("The student has already given feedback for this course.");
+            }
+        } catch (Exception e) {
+            // Handle specific exceptions (e.g., DataAccessException, etc.) if needed
+            throw new RuntimeException("Error while adding feedback: " + e.getMessage());
+        }
+    }
+
 
     public void deleteFeedback(Long id) {
         try {
