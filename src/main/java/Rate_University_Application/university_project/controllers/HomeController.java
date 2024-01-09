@@ -30,6 +30,7 @@ public class HomeController {
     }
     @ModelAttribute("newFeedback")
     public Feedback getNewFeedbackModel() {
+
         return new Feedback();
     }
 
@@ -188,8 +189,12 @@ public class HomeController {
 
     @RequestMapping("/course/{id}")
     public String course(HttpSession session, Model model, @PathVariable Long id) {
-
         Long loggedInUserID = (Long) session.getAttribute("loggedInUserID");
+        boolean enrolled = courseServ.isStudentEnrolled(id, loggedInUserID);
+        model.addAttribute("enrolled", enrolled);
+
+
+//        Long loggedInUserID = (Long) session.getAttribute("loggedInUserID");
 
         if (loggedInUserID == null) {
 
@@ -210,6 +215,29 @@ public class HomeController {
         List<Feedback> feedbacks = feedbackServ.getFeedbacksByCourse(course);
         model.addAttribute("feedbacks", feedbacks);
         return "course.jsp";
+
+
+    }
+    @PostMapping("/enroll/{courseId}")
+    public String enrollCourse(@PathVariable Long courseId, HttpSession session) {
+        Long loggedInUserID = (Long) session.getAttribute("loggedInUserID");
+
+        if (loggedInUserID == null) {
+            return "redirect:/"; // Redirect to login if the user is not logged in
+        }
+
+        // Check if the student is already enrolled in the course
+        if (courseServ.isStudentEnrolled(courseId, loggedInUserID)) {
+            // Student is already enrolled
+            // You can redirect to a page indicating they are already enrolled
+            return "redirect:/course/" + courseId; // Redirect to course page
+        }
+
+        // Enroll the student in the course
+        courseServ.enrollStudentInCourse(courseId, loggedInUserID);
+
+        // Redirect to the course page after enrollment
+        return "redirect:/course/" + courseId;
     }
 
 
