@@ -10,9 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import java.util.*;
+
 
 @Controller
 public class HomeController {
@@ -95,7 +94,6 @@ public class HomeController {
         }
 
         Student loggedInStudent = studentServ.findOneUser(loggedInUserID);
-
         model.addAttribute("user", loggedInStudent);
 
         List<Course> allCourses = courseServ.getAllCourses();
@@ -105,26 +103,6 @@ public class HomeController {
 
     }
 
-    //a controller to display feedback.jsp
-    // @RequestMapping("/feedback/{id}")
-    // public String feedback(HttpSession session, Model model, @PathVariable Long id) {
-
-    //     Long loggedInUserID = (Long) session.getAttribute("loggedInUserID");
-
-    //     if (loggedInUserID == null) {
-
-    //         return "redirect:/";
-    //     }
-    //     Student loggedInStudent = studentServ.findOneUser(loggedInUserID);
-
-    //     model.addAttribute("user", loggedInStudent);
-
-    //     //get one course with the provided id
-    //     Course course = courseServ.getCourseById(id);
-    //     model.addAttribute("course", course);
-
-    //     return "feedback.jsp";
-    // }
 
     @GetMapping("/search")
     public String searchCourses(@RequestParam("name") String name, Model model, HttpSession session) {
@@ -162,13 +140,14 @@ public class HomeController {
 
         int studentsNum = course.getRegisteredStudentsNum();
         model.addAttribute("studentsNum", studentsNum);
-
-        //get all feedbacks for the course
+        //get all feedbacks for the course with the student's full name
         List<Feedback> feedbacks = feedbackServ.getFeedbacksByCourse(course);
         model.addAttribute("feedbacks", feedbacks);
+        // Check if the logged-in student is enrolled in the course
+        boolean enrolled = courseServ.isStudentEnrolled(id, loggedInUserID);
+        model.addAttribute("enrolled", enrolled);
         return "course.jsp";
     }
-
 
 
 

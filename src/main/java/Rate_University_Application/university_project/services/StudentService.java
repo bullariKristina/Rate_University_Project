@@ -1,5 +1,6 @@
 package Rate_University_Application.university_project.services;
 
+import Rate_University_Application.university_project.models.Course;
 import Rate_University_Application.university_project.models.LoginStudent;
 import Rate_University_Application.university_project.models.Student;
 import Rate_University_Application.university_project.repositories.StudentRepository;
@@ -7,6 +8,8 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
+
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -81,6 +84,5 @@ public class StudentService {
     public Student findOneUser(Long id) {
         return this.userRepo.findById(id).orElse(null);
     }
-
 
 }

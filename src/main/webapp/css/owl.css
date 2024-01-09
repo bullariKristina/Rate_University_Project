@@ -6,6 +6,10 @@
 /*
  *  Owl Carousel - Core
  */
+.purple{
+    background: #7b6ada;
+    color: #fff;
+}
 .owl-carousel {
   display: none;
   width: 100%;

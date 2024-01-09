@@ -25,101 +25,100 @@
 <body>
 
 <!-- ***** Preloader Start ***** -->
-<div id="js-preloader" class="js-preloader">
-    <div class="preloader-inner">
-        <span class="dot"></span>
-        <div class="dots">
-            <span></span>
-            <span></span>
-            <span></span>
+    <div id="js-preloader" class="js-preloader">
+        <div class="preloader-inner">
+            <span class="dot"></span>
+            <div class="dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </div>
-</div>
 <!-- ***** Preloader End ***** -->
 
 <!-- ***** Header Area Start ***** -->
-<header class="header-area header-sticky">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <nav class="main-nav">
-                    <!-- ***** Logo Start ***** -->
-                    <a href="/" class="logo">
-                        <h1>RATE COURSES</h1>
-                    </a>
-                    <!-- ***** Logo End ***** -->
-                    <!-- ***** Serach Start ***** -->
-                    <div class="search-input">
-                        <form action="${pageContext.request.contextPath}/search" method="get" class="d-flex">
-                            <input type="text" name="name" placeholder="Search the course" id="searchText" />
-                            <button type="submit"><i class="fa fa-search"></i></button>
-                        </form>
-                    </div>
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="/" class="logo">
+                            <h1>RATE COURSES</h1>
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Serach Start ***** -->
+                        <div class="search-input">
+                            <form action="${pageContext.request.contextPath}/search" method="get" class="d-flex">
+                                <input type="text" name="name" placeholder="Search the course" id="searchText" />
+                                <button class="border-0 purple" type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
 
-                    <ul class="nav">
-                        <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
-                        <li class="scroll-to-section"><a href="#courses">Courses</a></li>
-                        <li class="scroll-to-section"><a href="#team">Top 8 Rated</a></li>
-                        <li class="scroll-to-section"><a href="#events">Schedule Calendar</a></li>
-                        <li class="scroll-to-section"><a href="/logout">Logout</a></li>
-                    </ul>
-                    <a class='menu-trigger'>
-                        <span>Menu</span>
-                    </a>
-                    <!-- ***** Menu End ***** -->
-                </nav>
+                        <ul class="nav">
+                            <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
+                            <li class="scroll-to-section"><a href="#courses">Courses</a></li>
+                            <li class="scroll-to-section"><a href="#team">Top 8 Rated</a></li>
+                            <li class="scroll-to-section"><a href="#events">Schedule Calendar</a></li>
+                            <li class="scroll-to-section"><a href="/logout">Logout</a></li>
+                        </ul>
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
             </div>
         </div>
-    </div>
-</header>
+    </header>
 <!-- ***** Header Area End ***** -->
 
-<div class="main-banner" id="top">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="owl-carousel owl-banner">
+    <div class="main-banner" id="top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="owl-carousel owl-banner">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 
-<section class="section courses" id="courses" >
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <div class="section-heading">
-                    <h6>UPT Courses</h6>
-                    <h2>UPT Courses</h2>
+    <section class="section courses" id="courses" >
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="section-heading">
+                        <h6>UPT Courses</h6>
+                        <h2>UPT Courses</h2>
+                    </div>
                 </div>
             </div>
-        </div>
 
-         <div class="row event_box">
-             <c:forEach var="course" items="${courses}">
-                 <div class="col-lg-4 col-md-6 align-self-center mb-30 event_outer col-md-6 firstYear">
-                     <div class="events_item">
-                         <div class="thumb">
-                             <a href="/course/${course.id}"><img src="../templatemo_586_scholar/assets/images/course-01.jpg" alt=""></a>
-                             <span class="category">${course.duration} weeks</span>
-                             <span class="price"><h6>JOIN</h6></span>
-                         </div>
-                         <div class="down-content">
-                             <span class="author">${course.lecturer}</span>
-                             <h4>${course.name}</h4>
+             <div class="row event_box">
+                 <c:forEach var="course" items="${courses}">
+                     <div class="col-lg-4 col-md-6 align-self-center mb-30 event_outer col-md-6">
+                         <div class="events_item">
+                             <div class="thumb">
+                                 <a href="/course/${course.id}"><img src="../templatemo_586_scholar/assets/images/course-01.jpg" alt=""></a>
+                                 <span class="category">${course.duration} weeks</span>
+                                 <span class="price"><h6>JOIN</h6></span>
+                             </div>
+                             <div class="down-content">
+                                 <span class="author">${course.lecturer}</span>
+                                 <h4>${course.name}</h4>
+                             </div>
                          </div>
                      </div>
-                 </div>
-             </c:forEach>
-
-         </div>
-    </div>
-</section>
+                 </c:forEach>
+             </div>
+        </div>
+    </section>
 
 
-    <div class="container" id ="events">
+    <div class="container" >
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="section-heading">
@@ -133,17 +132,17 @@
 
 
 <!-- Top 8 Rated Courses -->
-  <section class="top-rated-courses ">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <div class="section-heading">
-                    <h6>Top 8 Rated Courses</h6>
-                    <h2>Our Highest Rated Courses</h2>
+    <section class="top-rated-courses ">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="section-heading">
+                        <h6>Top 8 Rated Courses</h6>
+                        <h2>Our Highest Rated Courses</h2>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
+            <div class="row">
                 <div class="col-lg-3 col-md-6 align-self-center mb-30">
                     <div class="course-item">
                         <div class="thumb">
@@ -159,26 +158,28 @@
                         </div>
                     </div>
                 </div>
+            </div>
         </div>
-    </div>
-</section>
-<footer>
-    <div class="container">
-        <div class="col-lg-12">
-            <p>Rate Courses University Project</p>
+    </section>
+    <footer>
+        <div class="container">
+            <div class="col-lg-12">
+                <p>Rate Courses University Project</p>
+            </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
 <!-- Scripts -->
 <!-- Bootstrap core JavaScript -->
-<script src="../templatemo_586_scholar/vendor/jquery/jquery.min.js"></script>
-<script src="../templatemo_586_scholar/vendor/bootstrap/js/bootstrap.min.js"></script>
-<script src="../js/isotope.min.js"></script>
-<script src="../js/owl-carousel.js"></script>
-<script src="../js/counter.js"></script>
-<script src="../js/custom.js"></script>
-<script src="../js/join.js"></script>
+    <script src="../templatemo_586_scholar/vendor/jquery/jquery.min.js"></script>
+    <script src="../templatemo_586_scholar/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../js/isotope.min.js"></script>
+    <script src="../js/owl-carousel.js"></script>
+    <script src="../js/counter.js"></script>
+    <script src="../js/custom.js"></script>
+    <script src="../js/join.js"></script>
 
 </body>
+
+
 </html>

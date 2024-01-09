@@ -48,7 +48,7 @@
                     <div class="search-input">
                         <form action="${pageContext.request.contextPath}/search" method="get" class="d-flex">
                             <input type="text" name="name" placeholder="Search the course" id="searchText" />
-                            <button type="submit"><i class="fa fa-search"></i></button>
+                            <button class="border-0 purple" type="submit"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
 
@@ -80,16 +80,22 @@
     </div>
 </div>
 
-
-<div class="">
-    <div class="content">
-        <c:forEach var="course" items="${courses}">
-            <h3>Course Name: ${course.name}</h3>
-            <h3>Description:</h3>
-            <p>${course.description}</p>
-            <p></p>
-        </c:forEach>
-    </div>
+<div class="row event_box">
+    <c:forEach var="course" items="${courses}">
+        <div class="col-lg-4 col-md-6 align-self-center mb-30 event_outer col-md-6 firstYear">
+            <div class="events_item">
+                <div class="thumb">
+                    <a href="/course/${course.id}"><img src="../templatemo_586_scholar/assets/images/course-01.jpg" alt=""></a>
+                    <span class="category">${course.duration} weeks</span>
+                    <span class="price"><h6>JOIN</h6></span>
+                </div>
+                <div class="down-content">
+                    <span class="author">${course.lecturer}</span>
+                    <h4>${course.name}</h4>
+                </div>
+            </div>
+        </div>
+    </c:forEach>
 </div>
 
 

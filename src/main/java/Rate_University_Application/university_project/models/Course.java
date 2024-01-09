@@ -118,5 +118,8 @@ public class Course {
 
         return enrolledStudents.size();
     }
-
+    //method to get all students enrolled in a course
+    public List<StudentCourse> getEnrolledStudents() {
+        return enrolledStudents;
+    }
 }
