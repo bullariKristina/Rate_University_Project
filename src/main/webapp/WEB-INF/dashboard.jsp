@@ -118,7 +118,7 @@
     </section>
 
 
-    <div class="container" >
+    <div class="container" id ="events">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="section-heading">
@@ -132,7 +132,7 @@
 
 
 <!-- Top 8 Rated Courses -->
-    <section class="top-rated-courses ">
+    <section class="top-rated-courses " id="team">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">

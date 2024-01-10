@@ -240,7 +240,28 @@ public class HomeController {
         return "redirect:/course/" + courseId;
     }
 
+    //method to drop the course
+    @PostMapping("/drop/{courseId}")
+    public String dropCourse(@PathVariable Long courseId, HttpSession session) {
+        Long loggedInUserID = (Long) session.getAttribute("loggedInUserID");
 
+        if (loggedInUserID == null) {
+            return "redirect:/"; // Redirect to login if the user is not logged in
+        }
+
+        // Check if the student is enrolled in the course
+        if (!courseServ.isStudentEnrolled(courseId, loggedInUserID)) {
+            // Student is not enrolled in the course
+            // You can redirect to a page indicating they are not enrolled
+            return "redirect:/course/"+ courseId; // Redirect to course page
+        }
+
+        // Drop the course for the student
+        courseServ.dropStudentFromCourse(courseId, loggedInUserID);
+
+        // Redirect to a page or the course list after dropping the course
+        return "redirect:/course/"+ courseId; // Redirect to the main page or a specific course list page
+    }
 
 
     @RequestMapping("/logout")
