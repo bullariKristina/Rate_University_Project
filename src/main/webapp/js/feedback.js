@@ -1,21 +1,33 @@
-// Get all star elements
-const stars = document.querySelectorAll('.star');
+$(document).ready(function() {
+    $('.rate-box input[type="radio"]').on('change', function() {
+        var selectedRating = $(this).val();
+        $('.rate-box label').css('color', '#ddd');
+        $(this).siblings('label').css('color', '#ddd').prevAll('label').css('color', '#ffd700');
+        $(this).nextAll('label').css('color', '#ddd');
+    });
 
-// Add click event listeners to each star
-stars.forEach(star => {
-    star.addEventListener('click', function() {
-        const value = parseInt(this.getAttribute('data-value'));
+    $('#ratingForm').submit(function(event) {
+        event.preventDefault(); // Prevent default form submission
 
-        // Reset all stars to empty
-        stars.forEach(s => s.textContent = '☆');
-
-        // Fill stars up to the clicked star
-        for (let i = 0; i < value; i++) {
-            stars[i].textContent = '★';
+        var selectedRating = $('input[name="rating"]:checked').val();
+        if (selectedRating) {
+            // If a rating is selected, send it to the server via AJAX or modify the form action to include the selected rating
+            // Example using AJAX:
+            var ratingValue = $('input[name="rating"]:checked').val();
+            $.ajax({
+                type: 'POST',
+                url: '/submitFeedback',
+                data: { rating: ratingValue },
+                success: function(response) {
+                    // Handle success if needed
+                },
+                error: function(error) {
+                    // Handle error if needed
+                }
+            });
+        } else {
+            // Handle the case where no rating is selected
+            alert('Please select a rating!');
         }
-
-        // You can store the selected rating value in a hidden input field or send it to the server using AJAX
-        // For example, if you have an input field named 'rating'
-        document.getElementById('rating').value = value;
     });
 });

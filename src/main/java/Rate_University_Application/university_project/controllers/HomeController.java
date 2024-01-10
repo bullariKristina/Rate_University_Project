@@ -3,6 +3,7 @@ import Rate_University_Application.university_project.models.*;
 import Rate_University_Application.university_project.services.CourseService;
 import Rate_University_Application.university_project.services.FeedbackService;
 import Rate_University_Application.university_project.services.StudentService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -228,16 +229,14 @@ public class HomeController {
 
         // Check if the student is already enrolled in the course
         if (courseServ.isStudentEnrolled(courseId, loggedInUserID)) {
-            // Student is already enrolled
-            // You can redirect to a page indicating they are already enrolled
-            return "redirect:/course/" + courseId; // Redirect to course page
+                return "redirect:/course/" + courseId; // Redirect to course page
         }
 
         // Enroll the student in the course
         courseServ.enrollStudentInCourse(courseId, loggedInUserID);
 
-        // Redirect to the course page after enrollment
-        return "redirect:/course/" + courseId;
+            return "redirect:/course/" + courseId; // Redirect to course page
+
     }
 
     //method to drop the course
@@ -245,22 +244,21 @@ public class HomeController {
     public String dropCourse(@PathVariable Long courseId, HttpSession session) {
         Long loggedInUserID = (Long) session.getAttribute("loggedInUserID");
 
+
         if (loggedInUserID == null) {
             return "redirect:/"; // Redirect to login if the user is not logged in
         }
 
         // Check if the student is enrolled in the course
         if (!courseServ.isStudentEnrolled(courseId, loggedInUserID)) {
-            // Student is not enrolled in the course
-            // You can redirect to a page indicating they are not enrolled
-            return "redirect:/course/"+ courseId; // Redirect to course page
+                return "redirect:/course/" + courseId; // Redirect to course page
         }
 
         // Drop the course for the student
         courseServ.dropStudentFromCourse(courseId, loggedInUserID);
 
-        // Redirect to a page or the course list after dropping the course
-        return "redirect:/course/"+ courseId; // Redirect to the main page or a specific course list page
+
+            return "redirect:/course/" + courseId; // Redirect to course page
     }
 
 

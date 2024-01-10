@@ -105,7 +105,6 @@
 <script src="../js/owl-carousel.js"></script>
 <script src="../js/counter.js"></script>
 <script src="../js/custom.js"></script>
-<script src="../js/join.js"></script>
 
 </body>
 </html>
