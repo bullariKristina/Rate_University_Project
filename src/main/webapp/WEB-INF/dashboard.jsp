@@ -142,24 +142,22 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-6 align-self-center mb-30">
-                    <div class="course-item">
+            <div class="row event_box">
+                <c:forEach var="course" items="${top8}">
+                <div class="col-lg-4 col-md-6 align-self-center mb-30 event_outer col-md-6">
+                    <div class="events_item">
                         <div class="thumb">
-                            <!-- You can place the course image here -->
-                            <img src="/img/c.png" alt="Course Image">
+                            <a href="/course/${course.id}"><img src="../templatemo_586_scholar/assets/images/course-01.jpg" alt=""></a>
+                            <span class="category">${course.duration} weeks</span>
+                            <span class="price"><h6>JOIN</h6></span>
                         </div>
                         <div class="down-content">
+                            <span class="author">${course.lecturer}</span>
                             <h4>${course.name}</h4>
-                            <div class="rating">
-                                Rating: ${feedback.rating}
-                                <!-- You can include star icons or any other rating representation here -->
-                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+                </c:forEach>
     </section>
     <footer>
         <div class="container">

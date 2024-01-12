@@ -101,7 +101,7 @@
             </div>
             <div class="info-section">
                 <span class="info-label">Overall Rating:</span>
-                <span class="info-value">${course.calculateAverageRating()}</span>
+                <span class="info-value">${course.average}</span>
             </div>
             <div class="info-section">
                 <span class="info-label">Number of Students Enrolled:</span>

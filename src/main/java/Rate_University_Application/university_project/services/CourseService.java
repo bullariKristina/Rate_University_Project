@@ -7,6 +7,7 @@ import Rate_University_Application.university_project.models.StudentCourseId;
 import Rate_University_Application.university_project.repositories.CourseRepository;
 import Rate_University_Application.university_project.repositories.StudentCourseRepository;
 import Rate_University_Application.university_project.repositories.StudentRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -116,6 +117,15 @@ public void dropStudentFromCourse(Long courseId, Long studentId) {
             studentCourseRepository.delete(studentCourse);
         }
     }
+    //fetch me the findTop8ByOrderByAverageDesc
+    public List<Course> getTop8Courses() {
+        return courseRepo.findTop8ByOrderByAverageDesc();
+    }
 
+    //save the average of a given course
+    @Transactional
+    public void saveAverage(double average, Long id) {
+        courseRepo.updateAverage(average, id);
+    }
 
 }

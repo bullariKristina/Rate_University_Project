@@ -26,6 +26,7 @@ public class Feedback {
 
     @Column(updatable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date updatedAt;
@@ -51,7 +52,16 @@ public class Feedback {
         this.student=student;
         this.course=course;
     }
+    @PrePersist
+    public void onCreate() {
+        this.createdAt = new Date();
+        this.updatedAt = new Date();
+    }
 
+    @PreUpdate
+    public void onUpdate() {
+        this.updatedAt = new Date();
+    }
     public Long getId() {
         return id;
     }

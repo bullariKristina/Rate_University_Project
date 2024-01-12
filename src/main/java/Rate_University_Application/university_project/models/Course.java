@@ -28,7 +28,8 @@ public class Course {
 
     @NotEmpty
     private int duration; //duration of the course in weeks
-
+    @NotEmpty
+    private double average;
     //Enrolled students in the course
     @OneToMany(mappedBy = "course")
     private List<StudentCourse> enrolledStudents;
@@ -66,6 +67,14 @@ public class Course {
 
     public String getLocation() {
         return location;
+    }
+
+    public double getAverage() {
+        return average;
+    }
+
+    public void setAverage(double average) {
+        this.average = average;
     }
 
     public int getDuration() {

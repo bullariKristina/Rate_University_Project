@@ -104,7 +104,8 @@ public class HomeController {
 
         List<Course> allCourses = courseServ.getAllCourses();
         model.addAttribute("courses", allCourses);
-
+        List<Course> top8 = courseServ.getTop8Courses();
+        model.addAttribute("top8", top8);
         return "dashboard.jsp";
 
     }
@@ -177,7 +178,9 @@ public class HomeController {
             newFeedback.setStudent(loggedInStudent);
 
             feedbackServ.addFeedback(newFeedback);
-
+            double average = submittedCourse.calculateAverageRating();
+            System.out.println("Average: " + average);
+            courseServ.saveAverage(average, submittedCourse.getId());
             // Redirect to the course page
             return "redirect:/course/" + submittedCourse.getId();
         } catch (Exception e) {
