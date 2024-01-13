@@ -60,7 +60,7 @@
                             <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
                             <li class="scroll-to-section"><a href="#courses">Courses</a></li>
                             <li class="scroll-to-section"><a href="#team">Top 8 Rated</a></li>
-                            <li class="scroll-to-section"><a href="#events">Schedule Calendar</a></li>
+                            <li class="scroll-to-section"><a href="/calendar">Schedule Calendar</a></li>
                             <li class="scroll-to-section"><a href="/logout">Logout</a></li>
                         </ul>
                         <a class='menu-trigger'>
@@ -118,17 +118,6 @@
     </section>
 
 
-    <div class="container" id ="events">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <div class="section-heading">
-                    <h6>Schedule</h6>
-                    <h2>Upcoming Events</h2>
-                </div>
-            </div>
-            <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%237986CB&ctz=Europe%2FTirane&title=Rate%20Courses%20Calendar&showPrint=0&showCalendars=1&showTabs=0&src=cmFsZnR1c2hhMjRAZ21haWwuY29t&src=NjY4N2U1YjkwZWVmZGE1MWI5NDE0OWExNjNmZDRmZjQzMjUwZDUzMDM0NTFhMmJlZWYyNzkwYmFkMDFlNjdmZUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23039BE5&color=%237986CB" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe><div class="section events" id="events">
-        </div>
-    </div>
 
 
 <!-- Top 8 Rated Courses -->
@@ -139,6 +128,7 @@
                     <div class="section-heading">
                         <h6>Top 8 Rated Courses</h6>
                         <h2>Our Highest Rated Courses</h2>
+                        <h6>Courses that are well-received and have positive evaluations from students.</h6>
                     </div>
                 </div>
             </div>

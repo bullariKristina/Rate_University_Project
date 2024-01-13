@@ -70,78 +70,85 @@
     </header>
 <!-- ***** Header Area End ***** -->
 
-
-    <div class="main-banner" id="top">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="owl-carousel owl-banner">
-                    </div>
+<div class="main-banner" id="top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="owl-carousel owl-banner">
+                    <!-- Add content to your banner if needed -->
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <br>
+<div class="container mt-4">
+    <div class="content">
+        <h1 class="mb-4">${course.name}</h1>
 
-    <div class="container">
-        <div class="content">
-            <h1>${course.name}</h1><br>
+
+        <!-- Purple bordered box for information -->
+        <div class="border rounded p-3 mb-4" style="background-color:#7b6ada">
             <div class="info-section">
-                <span class="info-label">Lecturer:</span>
-                <span class="info-value">${course.lecturer}</span>
+                <span class="info-label text-white">Lecturer:</span>
+                <span class="info-value text-white">${course.lecturer}</span>
             </div>
             <div class="info-section">
-                <span class="info-label">Duration:</span>
-                <span class="info-value">${course.duration}</span>
+                <span class="info-label text-white">Duration:</span>
+                <span class="info-value text-white">${course.duration}</span>
             </div>
             <div class="info-section">
-                <span class="info-label">Location:</span>
-                <span class="info-value">${course.location}</span>
+                <span class="info-label text-white">Location:</span>
+                <span class="info-value text-white">${course.location}</span>
             </div>
             <div class="info-section">
-                <span class="info-label">Overall Rating:</span>
-                <span class="info-value">${course.average}</span>
+                <span class="info-label text-white">Overall Rating:</span>
+                <span class="info-value text-white">${course.average}</span>
             </div>
             <div class="info-section">
-                <span class="info-label">Number of Students Enrolled:</span>
-                <span class="info-value">${studentsNum}</span>
-            </div> <br>
+                <span class="info-label text-white">Number of Students Enrolled:</span>
+                <span class="info-value text-white">${studentsNum}</span>
+            </div>
+        </div>
+
+        <div class="mt-4">
             <h5>Description:</h5>
             <p>${course.description}</p>
-            <br>
+        </div>
 
+        <div class="mt-4">
             <c:choose>
                 <c:when test="${enrolled eq false}">
                     <!-- If the student is not enrolled, show the enroll button -->
                     <form action="/enroll/${course.id}" method="post">
-                        <button type="submit">Enroll in Course</button>
+                        <button class="btn btn-primary" type="submit">Enroll in Course</button>
                     </form>
                 </c:when>
                 <c:otherwise>
-                    <!-- If the student is enrolled, show the drop button -->
+                    <!-- If the student is enrolled, show the drop button and "Leave Feedback" button -->
                     <form action="/drop/${course.id}" method="post">
-                        <button type="submit">Drop</button>
+                        <button class="btn btn-danger" type="submit">Drop</button>
                     </form>
+
+                    <!-- "Leave Feedback" button -->
+                    <div class="content mt-4">
+                        <a href="/feedback/${course.id}" class="btn btn-success">Leave Feedback</a>
+                    </div>
                 </c:otherwise>
             </c:choose>
         </div>
 
-        <div class="content">
-            <br><br>
-            <a href="/feedback/${course.id}">
-                <button type="button">Leave Feedback</button>
-            </a><br><br>
 
-            <!-- Display Existing Feedback -->
 
-                <h2>Existing Feedback:</h2>
-                <c:if test="${empty feedbacks}">
-                    <p>No feedback yet. Be the first to leave one!</p>
-                </c:if>
+        <div class="mt-4">
+            <h2>Existing Feedback:</h2>
+            <c:if test="${empty feedbacks}">
+                <p>No feedback yet. Be the first to leave one!</p>
+            </c:if>
+
             <div class="d-flex flex-wrap justify-content-between">
                 <c:forEach var="feedback" items="${feedbacks}" varStatus="loop">
-                    <div class="feedback">
+                    <div class="feedback mb-4 p-3 border rounded">
                         <p class="fw-bold">${feedback.student.firstName} ${feedback.student.lastName}</p>
                         <p>Posted on: <fmt:formatDate value="${feedback.createdAt}" pattern="dd-MM-yyyy"/></p>
                         <br>
@@ -159,6 +166,8 @@
             </div>
         </div>
     </div>
+</div>
+
 
 
 <!-- JavaScript for star rating -->

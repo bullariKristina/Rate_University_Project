@@ -109,6 +109,10 @@ public class HomeController {
         return "dashboard.jsp";
 
     }
+    @GetMapping("/calendar")
+    public String showCalendar() {
+        return "calendar.jsp";
+    }
 
 
     @GetMapping("/search")
@@ -186,7 +190,7 @@ public class HomeController {
         } catch (Exception e) {
             e.printStackTrace(); // Print the stack trace for debugging
             // Handle exceptions if any during feedback addition
-            return "error-page"; // Redirect to an error page or handle error accordingly
+            return "error-page.jsp"; // Redirect to an error page or handle error accordingly
         }
     }
 
