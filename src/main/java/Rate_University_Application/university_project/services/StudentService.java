@@ -1,7 +1,5 @@
 package Rate_University_Application.university_project.services;
 
-import Rate_University_Application.university_project.models.Course;
-import Rate_University_Application.university_project.models.LoginStudent;
 import Rate_University_Application.university_project.models.Student;
 import Rate_University_Application.university_project.repositories.StudentRepository;
 import org.mindrot.jbcrypt.BCrypt;
@@ -9,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -56,7 +53,7 @@ public class StudentService {
     // This method will be called from the controller
     // whenever a user submits a login form.
 
-    public Student login(LoginStudent newLoginObject, BindingResult result) {
+    public Student login(Student newLoginObject, BindingResult result) {
 
         // Find user in the DB by email
         Optional<Student> potentialUser = this.userRepo.findByEmail(newLoginObject.getEmail());

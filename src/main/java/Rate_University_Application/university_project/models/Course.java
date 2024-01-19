@@ -49,6 +49,7 @@ public class Course {
         this.duration = duration;
     }
 
+
     public Long getId() {
         return id;
     }

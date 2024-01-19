@@ -3,7 +3,6 @@ import Rate_University_Application.university_project.models.*;
 import Rate_University_Application.university_project.services.CourseService;
 import Rate_University_Application.university_project.services.FeedbackService;
 import Rate_University_Application.university_project.services.StudentService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,10 +71,10 @@ public class HomeController {
     }
 
     @PostMapping("/login")
-    public String login(@Valid @ModelAttribute("newLogin") LoginStudent newLogin, BindingResult result, Model model,
+    public String login(@ModelAttribute("newLogin") Student newLogin, BindingResult result, Model model,
                         HttpSession session) {
 
-        // Add once service is implemented:
+        // Add once service is implemented
         Student student = studentServ.login(newLogin, result);
 
         if (result.hasErrors()) {
