@@ -30,3 +30,6 @@ This is how our team implemented the requirements of this project
 
 7.Feedback
 ![feedback](https://github.com/bullariKristina/Rate_University_Project/assets/140721116/7b9e0246-725f-40f1-9599-f219dc48e9a7)
+
+8.Coverage 
+![coverage](https://github.com/bullariKristina/Rate_University_Project/assets/140721116/b8b760ff-660d-4c31-9d32-ec6198d1111b)
